@@ -67,7 +67,7 @@ unique_entries = set()
 for item in items:
     # Extract the title
     title = item.find('h2', class_='more').find('a').get('title')
-    
+    URL = item.find('h2', class_='more').find('a').get('href')
     # Extract values inside div with class 'boxintxt'
     boxintxt_values = item.find_all('div', class_='boxintxt')
     
@@ -78,7 +78,7 @@ for item in items:
     date = boxintxt_values[3].text.strip() if len(boxintxt_values) > 3 else "N/A"
     
     # Create a tuple of the unique attributes
-    entry = (title, location, price, km)
+    entry = (title, URL, location, price, km)
     
     # Check if this entry is already processed
     if entry in unique_entries:
@@ -88,6 +88,7 @@ for item in items:
     unique_entries.add(entry)
     
     # Print the extracted values
+    print(f"URL: {URL}")
     print(f"Title: {title}")
     print(f"Location: {location}")
     print(f"Price: {price}")
